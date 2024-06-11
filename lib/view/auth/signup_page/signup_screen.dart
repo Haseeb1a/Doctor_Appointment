@@ -1,11 +1,13 @@
-import 'package:doctor_appointment/consts/consts.dart';
+import 'package:doctor_appointment/constants/consts.dart';
 import 'package:doctor_appointment/controllers/signup_controller.dart';
+import 'package:doctor_appointment/view/widgets/custom_botton.dart';
 import 'package:doctor_appointment/view/widgets/textformfeilds.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import '../../../consts/constants.dart';
-import '../Login_screen/home_screen.dart';
+import '../../../constants/constants.dart';
+import '../Login_screen/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -14,7 +16,6 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeController = Provider.of<SignupController>(context);
     return Scaffold(
-      appBar: AppBar(),
       body: Container(
           margin: EdgeInsets.only(top: 40),
           padding: EdgeInsets.all(8),
@@ -23,10 +24,14 @@ class SignupScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Image.asset('assets/doctorAppoinment (1).png'),
+                  SizedBox(
+                    width: 250,
+                    child:
+                        Lottie.asset('assets/Animation - 1718086168737.json'),
+                  ),
                 ],
               ),
-              CustomConstant.sizedBox(20),
+              CustomBox.height(20),
               Expanded(
                 flex: 2,
                 child: Container(
@@ -35,59 +40,52 @@ class SignupScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Custom_Textformfeild(
-                          hinttext: "Enter Your Name",
-                          textEditingController:
-                              homeController.emailController),
-                      CustomConstant.sizedBox(20),
+                        hinttext: "Enter Your Name",
+                        textEditingController: homeController.emailController,
+                        icon: Icons.person,
+                      ),
+                      CustomBox.height(20),
                       Custom_Textformfeild(
-                          hinttext: "Enter Your Email",
-                          textEditingController:
-                              homeController.emailController),
-                      CustomConstant.sizedBox(20),
+                        hinttext: "Enter Your Email",
+                        textEditingController: homeController.emailController,
+                        icon: Icons.email,
+                      ),
+                      CustomBox.height(20),
                       Custom_Textformfeild(
-                          hinttext: "Enter Your Password ",
-                          textEditingController:
-                              homeController.passwordController),
-                      CustomConstant.sizedBox(20),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              AppStrings.forgetpassword,
-                              style: TextStyle(color: Colors.blue),
-                            )),
+                        hinttext: "Enter Your Password ",
+                        textEditingController:
+                            homeController.passwordController,
+                        icon: Icons.lock,
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Your onPressed code here
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Color.fromARGB(255, 0, 0, 0),
-                          backgroundColor: Colors.blue, // Text color
-                        ),
-                        child: Text('SignUp'),
-                      ),
-                      CustomConstant.sizedBox(20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Loginpage(),
-                              ));
-                        },
-                        child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              AppStrings.haveanAccount,
-                              style: TextStyle(color: Colors.blue),
-                            )),
-                      ),
+                      CustomBox.height(20),
+                      CustomButton(
+                        text: "SingUp",
+                        onPressed: () {},
+                      )
                     ],
                   ),
                 ))),
-              )
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Loginpage(),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      AppStrings.haveanAccount,
+                      style: TextStyle(color: Color.fromARGB(255, 0, 107, 194)),
+                    ),
+                  ),
+                ),
+              ),
             ],
           )),
     );

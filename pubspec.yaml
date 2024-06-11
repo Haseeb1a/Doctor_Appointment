@@ -37,6 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   floating_bottom_navigation_bar: ^1.5.2
   provider: ^6.1.2
+  velocity_x: ^4.2.1
+  firebase_core: ^3.0.0
+  cloud_firestore: ^5.0.0
+  firebase_auth: ^5.0.0
+  lottie: ^3.1.2
+  google_fonts: ^6.2.1
+  cached_network_image: ^3.3.1
+  awesome_bottom_bar: ^1.2.4
+  dot_navigation_bar: ^1.0.2
+  iconly: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +74,16 @@ flutter:
   assets:
     - assets/
     - assets/doctorAppoinment (1).png
+    - assets/Animation - 1718086269314.json
+    - assets/Animation - 1718086168737.json
+    - assets/ear.jpg
+    - assets/doctors.jpg
+    - assets/lungss.avif
+    - assets/heart.jpg
+    - assets/lunce.jpg
+    - assets/body.jpg
+    - assets/ears.jpg
+    - assets/liver.jpg
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 

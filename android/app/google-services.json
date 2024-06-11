@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "681144144752",
+    "project_id": "doctor-appointment-bdda5",
+    "storage_bucket": "doctor-appointment-bdda5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681144144752:android:fbd2d7dadca7af8e65b5b5",
+        "android_client_info": {
+          "package_name": "com.example.doctor_appointment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0brPIVacN1jCDOjikaAFJFyOO6CzVMMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
