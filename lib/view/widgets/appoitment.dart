@@ -54,7 +54,7 @@ class AppointmentScreen extends StatelessWidget {
                   textEditingController:
                       appointmentController.appointmentNameController,icon: Icons.person,),
               CustomBox.height(10),
-              AppStyles.boldText(title: 'Message '),
+              AppStyles.boldText(title: 'Message'),
               CustomBox.height(5),
               Custom_Textformfeild(
                   hinttext: "Enter the Message",

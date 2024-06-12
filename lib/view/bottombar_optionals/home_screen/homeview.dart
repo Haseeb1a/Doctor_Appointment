@@ -123,7 +123,7 @@ class Homeviewscreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: AppStyles.boldText(
                       size: 14,
-                      title: 'view All',
+                      title: 'View All',
                       color: Colors.black,
                     )),
                 Icon(Icons.arrow_right)

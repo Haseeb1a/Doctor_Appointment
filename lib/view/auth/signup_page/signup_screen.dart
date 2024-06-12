@@ -1,6 +1,7 @@
 import 'package:doctor_appointment/constants/consts.dart';
-import 'package:doctor_appointment/controllers/signup_controller.dart';
+import 'package:doctor_appointment/controllers/auth_controller/signup_controller.dart';
 import 'package:doctor_appointment/view/widgets/custom_botton.dart';
+import 'package:doctor_appointment/view/widgets/custom_snackbar.dart';
 import 'package:doctor_appointment/view/widgets/textformfeilds.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -14,7 +15,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeController = Provider.of<SignupController>(context);
+    final singUpcontroller = Provider.of<SignupController>(context);
     return Scaffold(
       body: Container(
           margin: EdgeInsets.only(top: 40),
@@ -41,26 +42,39 @@ class SignupScreen extends StatelessWidget {
                     children: [
                       Custom_Textformfeild(
                         hinttext: "Enter Your Name",
-                        textEditingController: homeController.emailController,
+                        textEditingController: singUpcontroller.nameController,
                         icon: Icons.person,
                       ),
                       CustomBox.height(20),
                       Custom_Textformfeild(
                         hinttext: "Enter Your Email",
-                        textEditingController: homeController.emailController,
+                        textEditingController: singUpcontroller.emailController,
                         icon: Icons.email,
                       ),
                       CustomBox.height(20),
                       Custom_Textformfeild(
                         hinttext: "Enter Your Password ",
                         textEditingController:
-                            homeController.passwordController,
+                            singUpcontroller.passwordController,
                         icon: Icons.lock,
                       ),
                       CustomBox.height(20),
                       CustomButton(
                         text: "SingUp",
-                        onPressed: () {},
+                        onPressed: () async {
+                          String? result = await singUpcontroller.userSingUp();
+                          if (result != null) {
+                            showCustomSnackBar(context, result);
+                          }
+                          if (result == "success") {
+                            Navigator.push(
+                              context,  
+                              MaterialPageRoute(
+                                builder: (context) => Loginpage(),
+                              ),
+                            );
+                          }
+                        },
                       )
                     ],
                   ),

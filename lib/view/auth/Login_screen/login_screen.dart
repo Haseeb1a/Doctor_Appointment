@@ -1,7 +1,8 @@
 import 'package:doctor_appointment/constants/consts.dart';
-import 'package:doctor_appointment/controllers/login_conteoller.dart';
+import 'package:doctor_appointment/controllers/auth_controller/login_conteoller.dart';
 import 'package:doctor_appointment/view/auth/signup_page/signup_screen.dart';
 import 'package:doctor_appointment/view/bottom_bar.dart';
+import 'package:doctor_appointment/view/widgets/custom_snackbar.dart';
 import 'package:doctor_appointment/view/widgets/textformfeilds.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -15,7 +16,7 @@ class Loginpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeController = Provider.of<LoginConteoller>(context);
+    final loginConteoller = Provider.of<LoginConteoller>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -45,14 +46,15 @@ class Loginpage extends StatelessWidget {
                       children: [
                         Custom_Textformfeild(
                           hinttext: "Enter Your Email",
-                          textEditingController: homeController.emailController,
+                          textEditingController:
+                              loginConteoller.emailController,
                           icon: Icons.email,
                         ),
                         CustomBox.height(20),
                         Custom_Textformfeild(
                           hinttext: "Enter Your Password",
                           textEditingController:
-                              homeController.passwordController,
+                              loginConteoller.passwordController,
                           icon: Icons.lock,
                         ),
                         CustomBox.height(20),
@@ -69,12 +71,22 @@ class Loginpage extends StatelessWidget {
                         CustomBox.height(20),
                         CustomButton(
                           text: 'Login',
-                          onPressed: () {
+                          onPressed: () async{
+                          String? result=  await loginConteoller.loginSerivces();
+
+                            if (result != null) {
+                            showCustomSnackBar(context, result);
+                          }
+                          if (result == "success") {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BottomBar(),
-                                ));
+                              context,  
+                              MaterialPageRoute(
+                                builder: (context) => BottomBar(),
+                              ),
+                            );
+                          }
+                        
+                          
                           },
                         )
                       ],

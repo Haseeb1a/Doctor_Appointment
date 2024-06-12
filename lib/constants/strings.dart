@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 const appname = "eMart";
@@ -32,7 +33,8 @@ var categoryimage = [
   'assets/liver.jpg',
   "assets/lunce.jpg",
   "assets/heart.jpg",
-
-  
-
 ];
+
+var settingsitems = ["forget password", "tearm and conditions", "logout"];
+
+var settingicons = [Icons.lock_open_outlined, Icons.bookmark_added, Icons.logout];
