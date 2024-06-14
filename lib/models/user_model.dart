@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_appointment/controllers/appointment_controller.dart';
-import 'package:doctor_appointment/models/user_appointment_model.dart';
+import 'package:doctor_appointment/models/user_appointment_model.dart'; // Ensure the correct model file is imported
 
 class Users {
   String email;
   String uid;
   String username;
-  List<UserAppointmentModel> appointments;
+  List<AppointmentModel> appointments;
 
   Users({
     required this.email,
@@ -15,13 +15,15 @@ class Users {
     required this.appointments,
   });
 
+  // Converts the Users instance to a map for Firestore
   Map<String, dynamic> toJson() => {
         'username': username,
         'uid': uid,
         'email': email,
-        'appointments': appointments.map((appointment) => appointment.toJson()).toList(),
+        'appointments': appointments.map((appointment) => appointment.toMap()).toList(),
       };
 
+  // Creates a Users instance from a Firestore DocumentSnapshot
   static Users fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
@@ -30,7 +32,7 @@ class Users {
       uid: snapshot['uid'] ?? '',
       email: snapshot['email'] ?? '',
       appointments: (snapshot['appointments'] as List<dynamic>)
-          .map((appointment) => UserAppointmentModel.fromSnap(appointment))
+          .map((appointment) => AppointmentModel.fromMap(appointment as Map<String, dynamic>))
           .toList(),
     );
   }

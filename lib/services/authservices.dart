@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:doctor_appointment/models/doctor_model.dart';
 import 'package:doctor_appointment/models/user_model.dart';
 import 'package:doctor_appointment/services/base_services.dart';
 import 'dart:io';
@@ -58,6 +59,45 @@ class AuthServices {
             .collection('user')
             .doc(cred.user!.uid)
             .set(user.toJson());
+        responce = "success";
+      }
+    } catch (err) {
+      responce = err.toString();
+    }
+    return responce;
+  }
+
+//   // Singup the user-----
+  Future<String> singUpDoctor(
+      {required String email,
+      required String password,
+      required String username,
+      required DoctorModel doctordetals
+      // dynamic file,
+      }) async {
+    String responce = 'some error occerred';
+    try {
+      log('${email}${password}${username}');
+      if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty) {
+        // SignUp Using Email And Password
+        UserCredential cred = await Base.auth
+            .createUserWithEmailAndPassword(email: email, password: password);
+
+        // User datas
+        DoctorModel doctordetails = DoctorModel(
+            about: doctordetals.about,
+            category: doctordetals.category,
+            id: cred.user!.uid,
+            name: doctordetals.name,
+            place: doctordetals.place,
+            qualifications: doctordetals.qualifications,
+            workingTime: doctordetals.workingTime,
+            phone: doctordetals.phone);
+
+        await Base.firestore
+            .collection('user')
+            .doc(cred.user!.uid)
+            .set(doctordetails.toMap());
         responce = "success";
       }
     } catch (err) {

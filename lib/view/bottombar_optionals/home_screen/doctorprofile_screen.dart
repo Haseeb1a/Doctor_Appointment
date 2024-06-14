@@ -1,6 +1,8 @@
 import 'package:doctor_appointment/constants/constants.dart';
 import 'package:doctor_appointment/constants/consts.dart';
+import 'package:doctor_appointment/models/doctor_model.dart';
 import 'package:doctor_appointment/view/widgets/appoitment.dart';
+import 'package:doctor_appointment/view/widgets/traspent_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -8,12 +10,26 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../widgets/custom_botton.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
-  const DoctorProfileScreen({super.key});
+  DoctorModel doctordetilas;
+   DoctorProfileScreen({super.key,required this.doctordetilas});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TransparentButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: AppColors.primary,
+                icons: Icon(
+                  Icons.chevron_left_sharp,
+                  color: Colors.white,
+                  
+                )),
+        ),
         title: AppStyles.boldText(
             title: 'Doctor Name', color: Colors.black, size: 29),
       ),
@@ -49,11 +65,11 @@ class DoctorProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppStyles.boldText(
-                            title: 'Doctor Name',
+                            title: doctordetilas.name,
                             color: Colors.black,
                             size: 18),
                         AppStyles.boldText(
-                            title: 'Specialization',
+                            title: doctordetilas.category,
                             color: Colors.black,
                             size: 18),
                         // Spacer(),
@@ -66,7 +82,7 @@ class DoctorProfileScreen extends StatelessWidget {
                           stepInt: true,
                         ),
                         AppStyles.boldText(
-                            title: 'See All Reviews',
+                            title: doctordetilas.phone,
                             color: Colors.black,
                             size: 18),
                       ],
@@ -96,7 +112,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       title: AppStyles.boldText(
                           title: 'Contact Information', color: Colors.black),
                       subtitle: AppStyles.normalText(
-                          title: "Phone: 454", color: Colors.red, size: 18.0),
+                          title: doctordetilas.phone, color: Colors.red, size: 18.0),
                       trailing: Container(
                           width: 50,
                           padding: EdgeInsets.all(8),
@@ -113,26 +129,26 @@ class DoctorProfileScreen extends StatelessWidget {
                     AppStyles.boldText(title: 'About', color: Colors.black),
                     SizedBox(height: 5),
                     AppStyles.normalText(
-                        title: 'This is the section about the doctor',
+                        title: doctordetilas.about,
                         color: Colors.black),
                     SizedBox(height: 10),
                     AppStyles.boldText(title: 'Address', color: Colors.black),
                     SizedBox(height: 5),
                     AppStyles.normalText(
-                        title: 'Address of the doctor', color: Colors.black),
+                        title: doctordetilas.place, color: Colors.black),
                     SizedBox(height: 10),
                     AppStyles.boldText(
                         title: 'Working Time', color: Colors.black),
                     SizedBox(height: 5),
                     AppStyles.normalText(
-                        title: '9:00 AM to 12:00 PM',
+                        title: doctordetilas.workingTime,
                         color: Colors.black,
                         size: 18),
                     SizedBox(height: 10),
                     AppStyles.boldText(title: 'Services', color: Colors.black),
                     SizedBox(height: 5),
                     AppStyles.normalText(
-                        title: 'These are the services offered by the doctor',
+                        title: doctordetilas.qualifications,
                         color: Colors.black,
                         size: 18),
                   ],
@@ -145,13 +161,13 @@ class DoctorProfileScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomButton(
-          backgroundColor: Colors.green,
+          backgroundColor: AppColors.primary,
           text: "Book an Appointment",
           onPressed: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AppointmentScreen(),
+                  builder: (context) => AppointmentScreen(doctordetilas:doctordetilas ,),
                 ));
           },
         ),

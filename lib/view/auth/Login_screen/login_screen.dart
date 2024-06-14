@@ -46,6 +46,7 @@ class Loginpage extends StatelessWidget {
                       children: [
                         Custom_Textformfeild(
                           hinttext: "Enter Your Email",
+                                 unvaildText: "Enter The valid Email",
                           textEditingController:
                               loginConteoller.emailController,
                           icon: Icons.email,
@@ -53,6 +54,7 @@ class Loginpage extends StatelessWidget {
                         CustomBox.height(20),
                         Custom_Textformfeild(
                           hinttext: "Enter Your Password",
+                                 unvaildText: "Enter The Valid Password",
                           textEditingController:
                               loginConteoller.passwordController,
                           icon: Icons.lock,

@@ -48,6 +48,10 @@ dependencies:
   dot_navigation_bar: ^1.0.2
   iconly: ^1.0.1
   dio: ^5.4.3+1
+  shimmer: ^3.0.0
+  table_calendar: ^3.1.2
+  numberpicker: ^2.1.2
+  board_datetime_picker: ^1.6.7
 
 dev_dependencies:
   flutter_test:

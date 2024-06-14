@@ -1,16 +1,19 @@
 import 'package:doctor_appointment/constants/constants.dart';
 import 'package:doctor_appointment/constants/consts.dart';
+import 'package:doctor_appointment/controllers/category_controller/category_controller.dart';
 import 'package:doctor_appointment/view/bottombar_optionals/category_screen/categorydetails_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categoryController = Provider.of<CategoryController>(context);
     return Scaffold(
       appBar: AppBar(
-           automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         elevation: 0.0,
         title: AppStyles.normalText(title: "Category", size: 18),
       ),
@@ -27,6 +30,7 @@ class CategoryScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
+                categoryController.selectedCategory(iconsTitleList[index]);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -50,7 +54,9 @@ class CategoryScreen extends StatelessWidget {
                     // Divider(color: Colors.white,),
                     CustomBox.height(20),
                     AppStyles.boldText(
-                        title: index.toString(), color: Colors.white, size: 16),
+                        title: iconsTitleList[index],
+                        color: Colors.white,
+                        size: 16),
                     CustomBox.height(10),
                     AppStyles.normalText(
                         title: "kjglk", color: Colors.white, size: 16),

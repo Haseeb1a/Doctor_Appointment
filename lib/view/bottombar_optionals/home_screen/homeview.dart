@@ -1,8 +1,10 @@
 import 'package:doctor_appointment/constants/constants.dart';
 import 'package:doctor_appointment/constants/consts.dart';
+import 'package:doctor_appointment/controllers/bottom_controller.dart';
 import 'package:doctor_appointment/controllers/home_controller.dart';
 import 'package:doctor_appointment/view/bottombar_optionals/home_screen/categorytile.dart';
 import 'package:doctor_appointment/view/bottombar_optionals/home_screen/doctorprofile_screen.dart';
+import 'package:doctor_appointment/view/widgets/custom_shimmer.dart';
 import 'package:doctor_appointment/view/widgets/textformfeilds.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ class Homeviewscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeController = Provider.of<HomeConteoller>(context);
+    final bottomController = Provider.of<BottomController>(context);
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -29,6 +32,7 @@ class Homeviewscreen extends StatelessWidget {
               children: [
                 Expanded(
                     child: Custom_Textformfeild(
+                             unvaildText: "search the valid doctor",
                   icon: Icons.person_3_rounded,
                   hinttext: 'Search Doctor',
                   textEditingController: homeController.SearchDoctorController,
@@ -70,47 +74,56 @@ class Homeviewscreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               height: 250,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: 3,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DoctorProfileScreen(),
-                          ));
-                    },
-                    child: Container(
-                      // clipBehavior: Clip.hardEdge,
-                      // color: Colors.black54,
-                      decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(15)),
-                      margin: EdgeInsets.only(right: 8),
-                      height: 100,
-                      width: 150,
-                      child: Column(
-                        children: [
-                          Container(
-                              decoration:
-                                  BoxDecoration(color: AppColors.primary),
-                              // width: 150,
-                              alignment: Alignment.center,
-                              // color: Colors.blue,
-                              child: Image.asset('assets/doctors.jpg')),
-                          CustomBox.height(5),
-                          Text(iconsTitleList[index]),
-                          CustomBox.height(5),
-                          Text(iconsTitleList[index])
-                        ],
-                      ),
+              child: bottomController.doctorDetails.isEmpty
+                  ? Custom_Shimmer(width: 150, height: 100)
+                  : ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: bottomController.doctorDetails.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Consumer<BottomController>(
+                          builder: (context, doctordatas, child) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DoctorProfileScreen(doctordetilas: doctordatas.doctorDetails[index],),
+                                    ));
+                              },
+                              child: Container(
+                                // clipBehavior: Clip.hardEdge,
+                                // color: Colors.black54,
+                                decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(15)),
+                                margin: EdgeInsets.only(right: 8),
+                                height: 100,
+                                width: 150,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColors.primary),
+                                        // width: 150,
+                                        alignment: Alignment.center,
+                                        // color: Colors.blue,
+                                        child:
+                                            Image.asset('assets/doctors.jpg')),
+                                    CustomBox.height(5),
+                                    AppStyles.boldText(title: doctordatas.doctorDetails[index].name),
+                                    CustomBox.height(5),
+                                    AppStyles.boldText(title: doctordatas.doctorDetails[index].category,color: Colors.white)
+                                    // Text(doctordatas.doctorDetails[index].category)
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             ),
           ),
           CustomBox.height(5),

@@ -1,46 +1,64 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor_appointment/controllers/appointment_controller.dart';
-
-class UserAppointmentModel {
-  String user;
-  String doctor;
-  String id;
-  String day;
-  String time;
-  String mobile;
+class AppointmentModel {
+  String doctorName;
+  String username;
+  String status;
+  String place;
+  String category;
+  String qualification;
   String message;
+  String time;
+  
 
-  UserAppointmentModel({
-    required this.user,
-    required this.doctor,
-    required this.id,
-    required this.day,
+  AppointmentModel({
+    required this.doctorName,
+    required this.username,
+    required this.status,
+    required this.place,
+    required this.category,
+    required this.qualification,
     required this.time,
-    required this.mobile,
-    required this.message,
+    required this.message
   });
 
-  Map<String, dynamic> toJson() => {
-        'user': user,
-        'doctor': doctor,
-        'id': id,
-        'day': day,
-        'time': time,
-        'mobile': mobile,
-        'message': message,
-      };
-
-  static UserAppointmentModel fromSnap(DocumentSnapshot snap) {
-    var snapshot = snap.data() as Map<String, dynamic>;
-
-    return UserAppointmentModel(
-      user: snapshot['user'] ?? '',
-      doctor: snapshot['doctor'] ?? '',
-      id: snapshot['id'] ?? '',
-      day: snapshot['day'] ?? '',
-      time: snapshot['time'] ?? '',
-      mobile: snapshot['mobile'] ?? '',
-      message: snapshot['message'] ?? '',
+  // Factory constructor for creating an instance from a map
+  factory AppointmentModel.fromMap(Map<String, dynamic> map) {
+    return AppointmentModel(
+      
+      doctorName: map['doctorName'],
+      username: map['username'],
+      status: map['status'],
+      place: map['place'],
+      category: map['category'],
+      qualification: map['qualification'],
+      message:  map['message'],
+      time:map['time'],
     );
+  }
+
+  // Method for converting an instance to a map
+  Map<String, dynamic> toMap() {
+    return {
+      'doctorName': doctorName,
+      'username': username,
+      'status': status,
+      'place': place,
+      'category': category,
+      'qualification': qualification,
+      'time': time,
+      "message":message
+    };
+  }
+
+   Map<String, dynamic> toJson() {
+    return {
+      'doctorName': doctorName,
+      'username': username,
+      'status': status,
+      'place': place,
+      'category': category,
+      'qualification': qualification,
+      'time': time,
+      'message': message,
+    };
   }
 }

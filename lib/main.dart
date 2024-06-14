@@ -1,11 +1,12 @@
 import 'package:doctor_appointment/controllers/appointment_controller.dart';
+import 'package:doctor_appointment/controllers/auth_controller/doctor_singupcontroller.dart';
 import 'package:doctor_appointment/controllers/bottom_controller.dart';
+import 'package:doctor_appointment/controllers/category_controller/category_controller.dart';
 import 'package:doctor_appointment/controllers/home_controller.dart';
 import 'package:doctor_appointment/controllers/auth_controller/login_conteoller.dart';
 import 'package:doctor_appointment/controllers/auth_controller/signup_controller.dart';
 import 'package:doctor_appointment/controllers/settings_controller/settings_controller.dart';
 import 'package:doctor_appointment/firebase_options.dart';
-import 'package:doctor_appointment/view/auth/Login_screen/login_screen.dart';
 import 'package:doctor_appointment/view/auth/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => SettingsController(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => CategoryController(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => DoctorSingupcontroller(),
         )
       ],
       child: MaterialApp(

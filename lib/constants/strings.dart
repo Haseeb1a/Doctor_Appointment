@@ -21,19 +21,23 @@ var iconsList = [
 ];
 
 var iconsTitleList = [
+   "heart",
   "Body",
   "ear",
   "liver",
   "lungs",
-  "heart",
+
+  
 ];
 var categoryimage = [
+  "assets/heart.jpg",
   "assets/body.jpg",
   "assets/ears.jpg",
   'assets/liver.jpg',
   "assets/lunce.jpg",
-  "assets/heart.jpg",
+  
 ];
+
 
 var settingsitems = ["forget password", "tearm and conditions", "logout"];
 

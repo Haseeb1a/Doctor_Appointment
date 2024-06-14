@@ -7,6 +7,13 @@ class SignupController extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+    final TextEditingController confrimpasswordController = TextEditingController();
+
+   String groupValue = 'user';
+  choosingRegistorCatogory(value) {
+    groupValue = value;
+    notifyListeners();
+  }
 
   Future<String?> userSingUp() async {
     log(nameController.text);
