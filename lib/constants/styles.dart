@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
-class AppStyles {
 
+class AppStyles {
   // normal text style---------------------
-  static  normalText({
-    required String title, 
-    Color color = Colors.black, 
-     double? size }) {
+  static normalText(
+      {required String title, Color color = Colors.black, double? size}) {
     return Text(
       title,
       style: TextStyle(
@@ -17,7 +14,7 @@ class AppStyles {
   }
 
   // bold text style---------------------
-    static Text boldText({
+  static Text boldText({
     required String title,
     Color color = Colors.black,
     double size = 18.0,
@@ -33,8 +30,7 @@ class AppStyles {
     );
   }
 
-
-    static final BoxDecoration shadowDecoraion = BoxDecoration(
+  static final BoxDecoration shadowDecoraion = BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(20),
       boxShadow: [

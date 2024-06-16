@@ -44,7 +44,8 @@ class DoctorSingupDetails extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 200,
-                    child: Lottie.asset('assets/Animation - 1718086168737.json'),
+                    child:
+                        Lottie.asset('assets/Animation - 1718086168737.json'),
                   ),
                 ],
               ),

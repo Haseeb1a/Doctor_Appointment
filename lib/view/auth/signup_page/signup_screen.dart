@@ -16,6 +16,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final singUpcontroller = Provider.of<SignupController>(context);
     return Scaffold(
       body: Container(
@@ -38,25 +39,26 @@ class SignupScreen extends StatelessWidget {
                 flex: 2,
                 child: Container(
                     child: Form(
+                      key: formKey,
                         child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Custom_Textformfeild(
-                               unvaildText: "enter the name",
+                        unvaildText: "enter the name",
                         hinttext: "Enter Your Name",
                         textEditingController: singUpcontroller.nameController,
                         icon: Icons.person,
                       ),
                       CustomBox.height(20),
                       Custom_Textformfeild(
-                               unvaildText: "enter the email",
+                        unvaildText: "enter the email",
                         hinttext: "Enter Your Email",
                         textEditingController: singUpcontroller.emailController,
                         icon: Icons.email,
                       ),
                       CustomBox.height(20),
                       Custom_Textformfeild(
-                               unvaildText: "enter the password",
+                        unvaildText: "enter the password",
                         hinttext: "Enter Your Password ",
                         textEditingController:
                             singUpcontroller.passwordController,
@@ -64,7 +66,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                       CustomBox.height(20),
                       Custom_Textformfeild(
-                               unvaildText: "enter the password",
+                        unvaildText: "enter the password",
                         hinttext: "Confirm Password",
                         textEditingController:
                             singUpcontroller.confrimpasswordController,
@@ -114,25 +116,37 @@ class SignupScreen extends StatelessWidget {
                             ? "More About You"
                             : "SingUp",
                         onPressed: () async {
-                          if (singUpcontroller.groupValue == 'Doctor') {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DoctorSingupDetails(confirmpassword:singUpcontroller.confrimpasswordController.text ,email: singUpcontroller.emailController.text,name: singUpcontroller.nameController.text,password: singUpcontroller.passwordController.text,),
-                                ));
-                          } else {
-                            String? result =
-                                await singUpcontroller.userSingUp();
-                            if (result != null) {
-                              showCustomSnackBar(context, result);
-                            }
-                            if (result == "success") {
+                          if (formKey.currentState!.validate()) {
+
+                            if (singUpcontroller.groupValue == 'Doctor') {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Loginpage(),
-                                ),
-                              );
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DoctorSingupDetails(
+                                      confirmpassword: singUpcontroller
+                                          .confrimpasswordController.text,
+                                      email:
+                                          singUpcontroller.emailController.text,
+                                      name:
+                                          singUpcontroller.nameController.text,
+                                      password: singUpcontroller
+                                          .passwordController.text,
+                                    ),
+                                  ));
+                            } else {
+                              String? result =
+                                  await singUpcontroller.userSingUp();
+                              if (result != null) {
+                                showCustomSnackBar(context, result);
+                              }
+                              if (result == "success") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Loginpage(),
+                                  ),
+                                );
+                              }
                             }
                           }
                         },

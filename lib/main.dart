@@ -1,11 +1,13 @@
-import 'package:doctor_appointment/controllers/appointment_controller.dart';
+import 'package:doctor_appointment/controllers/doctor_controller/doctor_bottom_controller.dart';
+import 'package:doctor_appointment/controllers/user_controller/category_controller/appointment_controller.dart';
+import 'package:doctor_appointment/controllers/user_controller/appointment_list_controller.dart';
 import 'package:doctor_appointment/controllers/auth_controller/doctor_singupcontroller.dart';
-import 'package:doctor_appointment/controllers/bottom_controller.dart';
-import 'package:doctor_appointment/controllers/category_controller/category_controller.dart';
-import 'package:doctor_appointment/controllers/home_controller.dart';
+import 'package:doctor_appointment/controllers/user_controller/bottom_controller.dart';
+import 'package:doctor_appointment/controllers/user_controller/category_controller/category_controller.dart';
+import 'package:doctor_appointment/controllers/user_controller/home_controller/home_controller.dart';
 import 'package:doctor_appointment/controllers/auth_controller/login_conteoller.dart';
 import 'package:doctor_appointment/controllers/auth_controller/signup_controller.dart';
-import 'package:doctor_appointment/controllers/settings_controller/settings_controller.dart';
+import 'package:doctor_appointment/controllers/user_controller/settings_controller/settings_controller.dart';
 import 'package:doctor_appointment/firebase_options.dart';
 import 'package:doctor_appointment/view/auth/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,11 +46,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SettingsController(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => CategoryController(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => DoctorSingupcontroller(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AppointmentListController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DoctorBottomController(),
         )
       ],
       child: MaterialApp(

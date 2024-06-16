@@ -21,24 +21,30 @@ var iconsList = [
 ];
 
 var iconsTitleList = [
-   "heart",
-  "Body",
-  "ear",
-  "liver",
-  "lungs",
-
-  
+  "All",
+  "Primary Care",
+  "Pediatrics",
+  "Cardiology",
+  "Dermatology",
+  "OB/GYN",
+  "Mental Health",
+  "Orthopedics",
 ];
 var categoryimage = [
-  "assets/heart.jpg",
-  "assets/body.jpg",
-  "assets/ears.jpg",
-  'assets/liver.jpg',
-  "assets/lunce.jpg",
-  
+  "assets/doctorss.jpg",
+  "assets/primaryCare.webp",
+  "assets/pediatrics.jpg",
+  'assets/cadiolology.jpg',
+  "assets/dermatology.jpg",
+  "assets/ob.jpg",
+  "assets/Mental Health.gif",
+  "assets/Orthopedics.jpg"
 ];
-
 
 var settingsitems = ["forget password", "tearm and conditions", "logout"];
 
-var settingicons = [Icons.lock_open_outlined, Icons.bookmark_added, Icons.logout];
+var settingicons = [
+  Icons.lock_open_outlined,
+  Icons.bookmark_added,
+  Icons.logout
+];

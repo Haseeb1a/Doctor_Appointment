@@ -52,6 +52,10 @@ dependencies:
   table_calendar: ^3.1.2
   numberpicker: ^2.1.2
   board_datetime_picker: ^1.6.7
+  shared_preferences: ^2.2.3
+  url_launcher: ^6.3.0
+  fade_shimmer: ^2.2.0
+  flutter_custom_clippers: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -81,14 +85,28 @@ flutter:
     - assets/doctorAppoinment (1).png
     - assets/Animation - 1718086269314.json
     - assets/Animation - 1718086168737.json
+    - assets/Animation - 1710342910991.json
+    - assets/empty_bookings-removebg-preview.png
+    - assets/all.webp
+    - assets/primaryCare.webp
+    - assets/cadiolology.jpg
+    - assets/pediatrics.jpg
     - assets/ear.jpg
     - assets/doctors.jpg
     - assets/lungss.avif
     - assets/heart.jpg
+    - assets/dermatology.jpg
+    - assets/ob.jpg
+    - assets/Orthopedics.jpg
+    - assets/Mental Health.gif
+    - assets/femaleDoctor-JzHZTDpCc-transformed (1).jpeg
     - assets/lunce.jpg
     - assets/body.jpg
     - assets/ears.jpg
     - assets/liver.jpg
+    - assets/Animation - 1718531961007.json
+    - assets/femaleDoctor.jpg
+    - assets/doctorss.jpg
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 

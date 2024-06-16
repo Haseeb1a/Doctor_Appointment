@@ -25,6 +25,7 @@ class DoctorSingupcontroller extends ChangeNotifier {
     print("Working Time: ${workingTimeController.text}");
     print("Phone: ${phoneController.text}");
     DoctorModel doctor = DoctorModel(
+        isDoctor:  true,
         about: aboutController.text,
         category: categoryController.text,
         id: '',
@@ -32,6 +33,7 @@ class DoctorSingupcontroller extends ChangeNotifier {
         place: placeController.text,
         qualifications: qualifciatonController.text,
         workingTime: workingTimeController.text,
+        gender: 'male',
         phone: phoneController.text);
     AuthServices().singUpDoctor(
         email: email, password: password, username: name, doctordetals: doctor);

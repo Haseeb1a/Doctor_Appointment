@@ -15,11 +15,10 @@ class LoginConteoller extends ChangeNotifier {
     print('ddddddddddddddddd $result');
     log(result);
     print('ddddddddddddddddd $result');
-    if (result != null) {
-      return result;
-    }
-    emailController.clear();
+     emailController.clear();
     passwordController.clear();
+    return result;
+   
   }
 
   //forgot password

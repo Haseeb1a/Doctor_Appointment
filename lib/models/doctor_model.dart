@@ -7,6 +7,8 @@ class DoctorModel {
   final String qualifications;
   final String workingTime;
   final String phone;
+  final bool isDoctor;
+  final String gender; // New field for gender
 
   DoctorModel({
     required this.about,
@@ -17,9 +19,11 @@ class DoctorModel {
     required this.qualifications,
     required this.workingTime,
     required this.phone,
+    required this.isDoctor,
+    required this.gender, // Added gender to constructor
   });
 
-  // Factory method to create a User instance from a map (e.g., from Firestore)
+  // Factory method to create a DoctorModel instance from a map (e.g., from Firestore)
   factory DoctorModel.fromMap(Map<String, dynamic> map) {
     return DoctorModel(
       about: map['about'] ?? '',
@@ -30,10 +34,12 @@ class DoctorModel {
       qualifications: map['qualifications'] ?? '',
       workingTime: map['workingTime'] ?? '',
       phone: map['phone'] ?? '',
+      isDoctor: map['isDoctor'] ?? false,
+      gender: map['gender'] ?? '', // Retrieve gender from map
     );
   }
 
-  // Method to convert a User instance to a map (e.g., for saving to Firestore)
+  // Method to convert a DoctorModel instance to a map (e.g., for saving to Firestore)
   Map<String, dynamic> toMap() {
     return {
       'about': about,
@@ -44,6 +50,8 @@ class DoctorModel {
       'qualifications': qualifications,
       'workingTime': workingTime,
       'phone': phone,
+      'isDoctor': isDoctor,
+      'gender': gender, // Include gender in the map
     };
   }
 }

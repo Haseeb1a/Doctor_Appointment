@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/appointment_controller.dart';
+import '../../controllers/user_controller/category_controller/appointment_controller.dart';
 
 class ModalItem extends StatelessWidget {
   const ModalItem({Key? key}) : super(key: key);

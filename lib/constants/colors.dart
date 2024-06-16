@@ -8,9 +8,8 @@ class AppColors {
   static const Color lightGrey = Color.fromRGBO(239, 239, 239, 1);
   static const Color redColor = Color.fromRGBO(230, 46, 4, 1);
   static const Color golden = Color.fromRGBO(255, 168, 0, 1);
- static const Color primary = Color.fromRGBO(25, 118, 210, 1);
-// static const Color primary = ge;
-
-  // Private constructor to prevent instantiation.
+  static const Color primary =  const Color.fromARGB(255, 0, 29, 53);
+  static const Color dark = Color.fromRGBO(0, 0, 0, 1);
+  static const Blueprimary = const Color.fromARGB(255, 0, 29, 53);
 
 }
