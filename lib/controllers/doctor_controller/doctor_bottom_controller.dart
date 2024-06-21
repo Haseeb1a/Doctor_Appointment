@@ -1,3 +1,4 @@
+import 'package:doctor_appointment/controllers/doctor_controller/doctor_appontment_list.dart';
 import 'package:doctor_appointment/models/user_appointment_model.dart';
 import 'package:doctor_appointment/services/api_services.dart';
 import 'package:doctor_appointment/models/doctor_model.dart';
@@ -8,8 +9,14 @@ import 'package:flutter/cupertino.dart';
 import 'dart:developer';
 
 class DoctorBottomController extends ChangeNotifier {
+  DoctorAppontmentList doctorAppontmentList = DoctorAppontmentList();
+  int workpending = 0;
+  int workcompleted = 0;
   DoctorBottomController() {
+    log('bottomWOrkingsssssssssssssssssssssssssssssssssssssss');
     getcurrentdoctor();
+    getchartdatas('pending');
+    getchartdatas('confirmed');
     // getuserdetails();
     // getdoctordetila();
     // // getAppoitmentdetails();
@@ -18,6 +25,22 @@ class DoctorBottomController extends ChangeNotifier {
     // doctorDetails;
     // notifyListeners;
   }
+
+  getchartdatas(String type) async {
+    if (type == "pending") {
+      final appointmentDetails =
+          await DoctorServices().getAllAppointmentsStatus("pending");
+      workpending = appointmentDetails.length;
+      notifyListeners();
+    } else {
+      final appointmentDetails =
+          await DoctorServices().getAllAppointmentsStatus("confirmed");
+      workcompleted = appointmentDetails.length;
+      log(workcompleted.toString());
+      notifyListeners();
+    }
+  }
+
   // Users? userDetails;
   DoctorModel? currentDoctror;
   // // List<AppointmentModel> appointmentDetails = [];

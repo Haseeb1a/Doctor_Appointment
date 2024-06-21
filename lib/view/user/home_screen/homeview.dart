@@ -358,7 +358,7 @@ class Homeviewscreen extends StatelessWidget {
                     ),
                     AppointmentStatusList(
                       bottomController: appointmentController,
-                      status: "Confirmed",
+                      status: "confirmed",
                     ),
                   ],
                 );

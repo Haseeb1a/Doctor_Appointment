@@ -1,4 +1,6 @@
 class AppointmentModel {
+  String userId;           // New field for user ID
+  String doctorId;         // New field for doctor ID
   String doctorName;
   String username;
   String status;
@@ -8,8 +10,9 @@ class AppointmentModel {
   String message;
   String time;
   
-
   AppointmentModel({
+    required this.userId,   // Include userId in the constructor
+    required this.doctorId, // Include doctorId in the constructor
     required this.doctorName,
     required this.username,
     required this.status,
@@ -21,23 +24,26 @@ class AppointmentModel {
   });
 
   // Factory constructor for creating an instance from a map
-  factory AppointmentModel.fromMap(Map<String, dynamic> map) {
+  factory AppointmentModel.fromMap( map) {
     return AppointmentModel(
-      
+      userId: map['userId'], // Map the userId field
+      doctorId: map['doctorId'], // Map the doctorId field
       doctorName: map['doctorName'],
       username: map['username'],
       status: map['status'],
       place: map['place'],
       category: map['category'],
       qualification: map['qualification'],
-      message:  map['message'],
-      time:map['time'],
+      message: map['message'],
+      time: map['time'],
     );
   }
 
   // Method for converting an instance to a map
   Map<String, dynamic> toMap() {
     return {
+      'userId': userId,     // Add userId to the map
+      'doctorId': doctorId, // Add doctorId to the map
       'doctorName': doctorName,
       'username': username,
       'status': status,
@@ -45,12 +51,15 @@ class AppointmentModel {
       'category': category,
       'qualification': qualification,
       'time': time,
-      "message":message
+      'message': message
     };
   }
 
-   Map<String, dynamic> toJson() {
+  // Method for converting an instance to JSON
+  Map<String, dynamic> toJson() {
     return {
+      'userId': userId,     // Add userId to the JSON map
+      'doctorId': doctorId, // Add doctorId to the JSON map
       'doctorName': doctorName,
       'username': username,
       'status': status,
@@ -58,7 +67,7 @@ class AppointmentModel {
       'category': category,
       'qualification': qualification,
       'time': time,
-      'message': message,
+      'message': message
     };
   }
 }

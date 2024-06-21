@@ -8,7 +8,6 @@ import 'package:doctor_appointment/services/base_services.dart';
 import '../models/user_model.dart';
 
 class UserServies {
-
   // get  current user
   Future<Users> getUserdetails() async {
     DocumentSnapshot doc = await Base.firestore
@@ -22,44 +21,36 @@ class UserServies {
 // get the doctor based on the category
   Future<List<DoctorModel>> getDoctorsbyCateogry(String category) async {
     if (category == "All") {
-      QuerySnapshot querySnapshot = await Base.firestore
-        .collection('doctors')
-        .get();
-    return querySnapshot.docs.map((doc) {
-      return DoctorModel.fromMap(doc.data() as Map<String, dynamic>);
-    }).toList();
+      QuerySnapshot querySnapshot =
+          await Base.firestore.collection('doctors').get();
+      return querySnapshot.docs.map((doc) {
+        return DoctorModel.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
     }
     // if the categorty is  non the all will present
     QuerySnapshot querySnapshot = await Base.firestore
         .collection('doctors')
-        .where('category',
-            isEqualTo: category)
+        .where('category', isEqualTo: category)
         .get();
     return querySnapshot.docs.map((doc) {
       return DoctorModel.fromMap(doc.data() as Map<String, dynamic>);
     }).toList();
   }
   // -----------------------------------------------------------------------
-
-
-
-
 
 // get the doctor based on the category
   Future<List<DoctorModel>> getDoctorsbynames(String doctor) async {
     if (doctor == "All") {
-      QuerySnapshot querySnapshot = await Base.firestore
-        .collection('doctors')
-        .get();
-    return querySnapshot.docs.map((doc) {
-      return DoctorModel.fromMap(doc.data() as Map<String, dynamic>);
-    }).toList();
+      QuerySnapshot querySnapshot =
+          await Base.firestore.collection('doctors').get();
+      return querySnapshot.docs.map((doc) {
+        return DoctorModel.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
     }
     // if the categorty is  non the all will present
     QuerySnapshot querySnapshot = await Base.firestore
         .collection('doctors')
-        .where('name',
-            isEqualTo: doctor)
+        .where('name', isEqualTo: doctor)
         .get();
     return querySnapshot.docs.map((doc) {
       return DoctorModel.fromMap(doc.data() as Map<String, dynamic>);
@@ -67,61 +58,53 @@ class UserServies {
   }
   // -----------------------------------------------------------------------
 
-
-
-
-
-
-
   //user set Apppintments
-Future<String> setAppointments({
-  required String time,
-  required String fullname,
-  required String phone,
-  required String message,
-  required DoctorModel doctor,
-}) async {
-  String response = 'Some error occurred';
-  try {
-    log('Message: $message, Phone: $phone, Time: $time, Full Name: $fullname, Doctor: ${doctor.name}');
-    
-    // Creating AppointmentModel instance
-    AppointmentModel appointment = AppointmentModel(
-      doctorName: doctor.name,
-      username: fullname,
-      status: "pending",
-      place: doctor.place,
-      category: doctor.category,
-      qualification: doctor.qualifications,
-      time: time,
-      message: message,
-    );
+  Future<String> setAppointments({
+    required String time,
+    required String fullname,
+    required String phone,
+    required String message,
+    required DoctorModel doctor,
+  }) async {
+    String response = 'Some error occurred';
+    try {
+      log('Message: $message, Phone: $phone, Time: $time, Full Name: $fullname, Doctor: ${doctor.name}');
 
-    // Saving the appointment to Firestore to user
-    await Base.firestore
-    .collection('user') 
-    .doc(Base.auth.currentUser!.uid)
-    .collection('Appointment') 
-    .doc()
-    .set(appointment.toJson());
+      // Creating AppointmentModel instance
+      AppointmentModel appointment = AppointmentModel(
+        doctorId: doctor.id,
+        userId: Base.auth.currentUser!.uid,
+        doctorName: doctor.name,
+        username: fullname,
+        status: "pending",
+        place: doctor.place,
+        category: doctor.category,
+        qualification: doctor.qualifications,
+        time: time,
+        message: message,
+      );
+      log(time);
+      // Saving the appointment to Firestore to user
+      await Base.firestore
+          .collection('user')
+          .doc(Base.auth.currentUser!.uid)
+          .collection('Appointment')
+          .doc(time)
+          .set(appointment.toJson());
 
-     // Saving the appointment to Firestore to doctor
-       await Base.firestore
-    .collection('doctors') 
-    .doc(Base.auth.currentUser!.uid)
-    .collection('Appointment') 
-    .doc() 
-    .set(appointment.toJson());
-    
-    response = "success";
-  } catch (err) {
-       log('Error: $err');
-    response = err.toString();
+      // Saving the appointment to Firestore to doctor
+      await Base.firestore
+          .collection('doctors')
+          .doc(doctor.id)
+          .collection('Appointment')
+          .doc(time)
+          .set(appointment.toJson());
+
+      response = "success";
+    } catch (err) {
+      log('Error: $err');
+      response = err.toString();
+    }
+    return response;
   }
-  return response;
-}
-
-
-
-
 }

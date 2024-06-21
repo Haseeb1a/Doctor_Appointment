@@ -1,4 +1,5 @@
 import 'package:doctor_appointment/controllers/doctor_controller/doctor_bottom_controller.dart';
+import 'package:doctor_appointment/controllers/doctor_controller/doctor_settitngs_controller.dart';
 import 'package:doctor_appointment/controllers/user_controller/category_controller/appointment_controller.dart';
 import 'package:doctor_appointment/controllers/user_controller/appointment_list_controller.dart';
 import 'package:doctor_appointment/controllers/auth_controller/doctor_singupcontroller.dart';
@@ -13,6 +14,9 @@ import 'package:doctor_appointment/view/auth/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'controllers/doctor_controller/doctor_appontment_list.dart';
+import 'controllers/doctor_controller/profile_edit_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,7 +61,17 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => DoctorBottomController(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DoctorSettitngsController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DoctorAppontmentList(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => DoctorProfileEditontroller(),
+        ),
+        // DoctorProfileEditontroller
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

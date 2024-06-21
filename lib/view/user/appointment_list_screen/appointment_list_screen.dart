@@ -208,6 +208,9 @@ class AppointmentStatusList extends StatelessWidget {
                   // Implement your onTap logic here
                 },
                 child: notificationCard(
+                  authAuth: "user",
+                  status: "pending",
+                  
                   appointmentDetails: appointmentDetails,
                   index: index,
                 ),

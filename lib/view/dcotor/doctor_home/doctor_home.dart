@@ -1,18 +1,33 @@
 import 'package:doctor_appointment/constants/colors.dart';
 import 'package:doctor_appointment/controllers/doctor_controller/doctor_bottom_controller.dart';
+import 'package:doctor_appointment/view/dcotor/dcotor_settings.dart/doctor_settings.dart';
+import 'package:doctor_appointment/view/dcotor/doctor_home/chat_page.dart';
 import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/styles.dart';
+import '../../../controllers/doctor_controller/doctor_appontment_list.dart';
 import '../../../controllers/user_controller/bottom_controller.dart';
+import '../appointment/doctor_appointment_list.dart';
 
 class DoctorHome extends StatelessWidget {
   const DoctorHome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appointmentController = Provider.of<DoctorAppontmentList>(
+      context,listen: false
+    );
+  //   appointmentController.getAppoitmentdetails("confirmed");
+    final bottomcontroller = Provider.of<DoctorBottomController>(
+      context,
+    );
+  //  bottomcontroller .getchartdatas('confirmed');
+  //   bottomcontroller .getchartdatas('pending');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
@@ -44,10 +59,18 @@ class DoctorHome extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
                   ),
-                  Spacer(
-                    
-                  ),
-                  Icon(IconlyBold.setting,color: Colors.white,)
+                  Spacer(),
+                  IconButton(
+                    icon: Icon(IconlyBold.setting),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DoctorSettings(),
+                          ));
+                    },
+                    color: Colors.white,
+                  )
                 ],
               );
             } else {
@@ -73,7 +96,40 @@ class DoctorHome extends StatelessWidget {
           },
         ),
       ),
-      body: Container(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 12, top: 12),
+            child: Row(
+              children: [
+                const Icon(Icons.insert_chart_outlined),
+                Text(
+                  "Progress",
+                  style: GoogleFonts.mali(
+                      fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+          ),
+          Chart(confirmed: bottomcontroller.workcompleted,
+          pending:bottomcontroller.workpending ,),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: Align(
+                alignment: Alignment.bottomLeft,
+                child: AppStyles.boldText(
+                    title: "Confirmed Appointments", color: AppColors.dark)),
+          ),
+          AppointmentStatusLists(
+            authType: "doctors",
+            // bottomController: bottomController,
+            status: "confirmed",
+          ),
+        ],
+      ),
     );
   }
 }

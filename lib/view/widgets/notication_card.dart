@@ -1,13 +1,21 @@
+// import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
+
 import 'package:doctor_appointment/view/user/appointment_list_screen/appointment_details_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/user_appointment_model.dart';
 
 class notificationCard extends StatelessWidget {
+  String status;
+  String authAuth;
   List<AppointmentModel> appointmentDetails;
   int index;
   notificationCard(
-      {super.key, required this.index, required this.appointmentDetails});
+      {super.key,
+      required this.index,
+      required this.appointmentDetails,
+      required this.authAuth,
+      required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +26,9 @@ class notificationCard extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AppointmentsDetailsView(appointmentModel: appointmentDetails[index],),
+                builder: (context) => AppointmentsDetailsView(
+                  appointmentModel: appointmentDetails[index],
+                ),
               ));
         },
         child: Container(
@@ -101,7 +111,9 @@ class notificationCard extends StatelessWidget {
                         Text(
                           appointmentDetails[index].category,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -122,10 +134,16 @@ class notificationCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        
                         Text(
                           appointmentDetails[index].place,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                   if ( authAuth=="doctors"&&status=="pending") Text(
+                          "Slide to confirm",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.6)),
                         ),
                         Text(
                           appointmentDetails[index]
@@ -148,6 +166,7 @@ class notificationCard extends StatelessWidget {
               ],
             ),
           ),
+
           // leading: ClipRRect(
           //   borderRadius: BorderRadius.circular(10),
           //   child: Image.network(

@@ -4,7 +4,9 @@ import 'package:doctor_appointment/controllers/doctor_controller/doctor_settitng
 import 'package:doctor_appointment/controllers/user_controller/bottom_controller.dart';
 import 'package:doctor_appointment/controllers/user_controller/settings_controller/settings_controller.dart';
 import 'package:doctor_appointment/view/auth/Login_screen/login_screen.dart';
+import 'package:doctor_appointment/view/dcotor/dcotor_settings.dart/doctor_profle_edit.dart';
 import 'package:doctor_appointment/view/user/settings_screen/settings_tiles.dart';
+import 'package:doctor_appointment/view/widgets/traspent_button.dart';
 import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -28,6 +30,7 @@ class DoctorSettings extends StatelessWidget {
       body: Column(
         children: [
           Stack(
+
             children: [
               ClipPath(
                 clipper: WaveClipperTwo(),
@@ -88,7 +91,7 @@ class DoctorSettings extends StatelessWidget {
                     )),
               ),
               Positioned(
-                right: 100,
+                left:170 ,
                 bottom: 28,
                 child: Consumer<DoctorBottomController>(
                   builder: (context, value, child) {
@@ -126,12 +129,12 @@ class DoctorSettings extends StatelessWidget {
                   bottom: 55,
                   child: GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           ProfileEditpage(user: userprovider.user),
-                      //     ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DoctorProfileEdit()
+                          ));
                     },
                     child: Container(
                         decoration: AppStyles.shadowDecoraion,
@@ -146,6 +149,22 @@ class DoctorSettings extends StatelessWidget {
                           Icons.movie_edit,
                         )),
                   )),
+                Positioned(
+                  top: 20,
+                  child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TransparentButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            color: AppColors.primary,
+            icons: Icon(
+              Icons.chevron_left_sharp,
+              color: Colors.white,
+            ),
+          ),
+        ),
+                )  
             ],
           ),
           Divider(),
