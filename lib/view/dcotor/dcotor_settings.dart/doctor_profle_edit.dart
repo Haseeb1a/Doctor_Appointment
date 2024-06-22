@@ -128,17 +128,27 @@ class _DoctorProfileEditState extends State<DoctorProfileEdit> {
                   Positioned(
                     bottom: 75,
                     right: 15,
-                    child: GestureDetector(
-                        onTap: () {},
-                        child: const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 12,
-                          child: Icon(
-                            Icons.edit,
-                            size: 15,
-                          ),
-                        )),
-                  ),
+                    child: StreamBuilder<bool>(
+                      stream: profilecontroller.getActiveStatusStream(),
+                      initialData: false,
+                      builder: (context, snapshot) {
+                        final isActive = snapshot.data ?? false;
+                        return Column(
+                          children: [
+                            AppStyles.normalText(title: isActive==true?"Active":"noActive", size: 12,color: Colors.white),
+                            Switch(
+                              value: isActive,
+                              onChanged: (value) {
+                                profilecontroller.updateActiveStatus(
+                                  value,
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
               const SizedBox(

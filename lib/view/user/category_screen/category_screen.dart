@@ -23,7 +23,7 @@ class CategoryScreen extends StatelessWidget {
     final homeConteoller = Provider.of<HomeConteoller>(
       context,
     );
-      final categoryController = Provider.of<CategoryController>(
+    final categoryController = Provider.of<CategoryController>(
       context,
     );
     // final userData = Provider.of<UserHomeConttoller>(
@@ -36,8 +36,7 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 80,
         elevation: 0,
-        backgroundColor:AppColors.primary,
-
+        backgroundColor: AppColors.primary,
         centerTitle: true,
         title: Consumer<CategoryController>(
           builder: (context, Professionalprovider, child) {
@@ -74,7 +73,8 @@ class CategoryScreen extends StatelessWidget {
                         ),
                         suffixIcon: IconButton(
                             onPressed: () {
-                              Professionalprovider.searchCetegryController.clear();
+                              Professionalprovider.searchCetegryController
+                                  .clear();
                             },
                             // onPressed: homepageconter.clearsearch,
                             icon: const Icon(
@@ -82,10 +82,12 @@ class CategoryScreen extends StatelessWidget {
                               color: Colors.black,
                             ))),
                   )
-                : Text('services',style: TextStyle(color: AppColors.whiteColor),);
+                : Text(
+                    'services',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  );
           },
         ),
-
         actions: [
           Consumer<CategoryController>(
             builder: (context, professionalprovider, child) {
@@ -106,7 +108,8 @@ class CategoryScreen extends StatelessWidget {
                             size: 17,
                           ))
                       : CircleAvatar(
-                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                          backgroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
                           child: Icon(
                             Icons.search,
                             color: Color.fromARGB(255, 13, 43, 67),
@@ -131,7 +134,7 @@ class CategoryScreen extends StatelessWidget {
                       return CategoryTile(
                         categoryImg: categoryimage[index],
                         categoryName: iconsTitleList[index],
-                        homeConteoller:categoryController ,
+                        homeConteoller: categoryController,
                       );
                     },
                   );
@@ -156,8 +159,8 @@ class CategoryScreen extends StatelessWidget {
                                   child: Lottie.asset(
                                       'assets/Animation - 1718531961007.json')),
                               Positioned(
-                                left: (screenSize.width/2)-70,
-                                top: (screenSize.height/2)-50,
+                                left: (screenSize.width / 2) - 70,
+                                top: (screenSize.height / 2) - 50,
                                 child: Text(
                                   'No Doctors Avaliable!',
                                   style: GoogleFonts.denkOne(
@@ -216,15 +219,16 @@ class CategoryScreen extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(25),
                                                 child: Hero(
-                                                  tag: 'posters',
-                                                  child:  value.categoryDoctors[index]
-                                                    
-                                                    .gender ==
-                                                "male"
-                                            ? Image.asset('assets/doctors.jpg')
-                                            : Image.asset(
-                                                'assets/femaleDoctor-JzHZTDpCc-transformed (1).jpeg')
-                                                )),
+                                                    tag: 'posters',
+                                                    child: value
+                                                                .categoryDoctors[
+                                                                    index]
+                                                                .gender ==
+                                                            "male"
+                                                        ? Image.asset(
+                                                            'assets/doctors.jpg')
+                                                        : Image.asset(
+                                                            'assets/femaleDoctor-JzHZTDpCc-transformed (1).jpeg'))),
                                           ),
                                           SizedBox(
                                             width: 30,
@@ -238,7 +242,7 @@ class CategoryScreen extends StatelessWidget {
                                                     .name,
                                                 style: TextStyle(
                                                     color: Colors.green,
-                                                    fontSize: 20,
+                                                    fontSize: 15,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -247,7 +251,7 @@ class CategoryScreen extends StatelessWidget {
                                                     .category,
                                                 style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 17,
+                                                    fontSize: 13,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -260,23 +264,26 @@ class CategoryScreen extends StatelessWidget {
                                                         FontWeight.bold),
                                               ),
                                               Text(
-                                                value.categoryDoctors[index]
-                                                    .qualifications,
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
+  value.categoryDoctors[index].qualifications != null
+      ? (value.categoryDoctors[index].qualifications.length > 16
+          ? value.categoryDoctors[index].qualifications.substring(0, 16)
+          : value.categoryDoctors[index].qualifications)
+      : '',
+  style: TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.bold,
+  ),
+),
                                             ],
                                           ),
                                           Spacer(),
                                           Align(
                                             alignment: Alignment.topLeft,
                                             child: Text(
-                                              value.categoryDoctors[index]
-                                                  .phone,
+                                              value
+                                                  .categoryDoctors[index].phone,
                                               style: TextStyle(
-                                                  fontSize: 14,
+                                                  fontSize: 11,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
@@ -284,7 +291,7 @@ class CategoryScreen extends StatelessWidget {
                                             width: 5,
                                           ),
                                           CircleAvatar(
-                                              radius: 10,
+                                              radius: 7,
                                               backgroundColor:
                                                   const Color.fromARGB(
                                                           255, 41, 28, 28)
@@ -292,7 +299,7 @@ class CategoryScreen extends StatelessWidget {
                                               child: Icon(
                                                 Icons.phone,
                                                 color: Colors.yellow,
-                                                size: 10,
+                                                size: 7,
                                               ))
                                         ],
                                       ),

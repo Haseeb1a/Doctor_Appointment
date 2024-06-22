@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_appointment/models/doctor_model.dart';
@@ -40,7 +41,7 @@ class DoctorServices {
 // get the Appointment based on the statusfiltter
   Future<List<AppointmentModel>> getAllAppointmentsStatus(
       String category) async {
-        log('rrrrrrrrrrrrrrrrrrrrrrrrrr${category}}');
+    log('rrrrrrrrrrrrrrrrrrrrrrrrrr${category}}');
     log(Base.auth.currentUser!.uid);
     QuerySnapshot querySnapshot = await Base.firestore
         .collection('doctors')
@@ -48,7 +49,7 @@ class DoctorServices {
         .collection('Appointment')
         .where('status', isEqualTo: category)
         .get();
-        
+
     querySnapshot.docs.map((doc) {
       final a = AppointmentModel.fromMap(doc.data());
       log('categry${a.time}');
@@ -117,5 +118,54 @@ class DoctorServices {
       print('Error updating document: $e');
       throw e; // Propagate the error to the caller
     }
+  }
+
+  Future<bool> isActiveChecker() async {
+    try {
+      DocumentSnapshot doc = await Base.firestore
+          .collection('doctors')
+          .doc(Base.auth.currentUser!.uid)
+          .get();
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        bool isActive = data['isActive'] ?? false;
+        return isActive;
+      } else {
+        // Handle the case where the document does not exist
+        return false;
+      }
+    } catch (e) {
+      // Handle any errors that occur during the fetch
+      print('Error fetching doctor data: $e');
+      return false;
+    }
+    // ---------------------------------------------------------------------------
+  }
+
+  Stream<bool> isActiveStream() {
+    return Base.firestore
+        .collection('doctors')
+        .doc(Base.auth.currentUser!.uid)
+        .snapshots()
+        .map((doc) {
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        log(data['isActive'].toString());
+        return data['isActive'] ?? false;
+      } else {
+        log('false');
+        return false;
+        
+      }
+    });
+  }
+
+  Future<void> updateActiveStatus(bool isActive) {
+    return Base.firestore
+        .collection('doctors')
+        .doc(Base.auth.currentUser!.uid)
+        .update({
+      'isActive': isActive,
+    });
   }
 }

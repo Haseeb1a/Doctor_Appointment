@@ -35,7 +35,7 @@ class DoctorHome extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Consumer<DoctorBottomController>(
           builder: (context, homedata, child) {
-            if (homedata.currentDoctror!.name != null) {
+            if (homedata.currentDoctror?.name != null) {
               return Row(
                 children: [
                   SizedBox(

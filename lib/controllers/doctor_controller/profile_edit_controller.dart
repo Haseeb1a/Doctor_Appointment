@@ -18,6 +18,30 @@ class DoctorProfileEditontroller extends ChangeNotifier {
   TextEditingController worktimeController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController qualificationController = TextEditingController();
+  bool isActive = false;
+
+  switchActive(value) {
+    isActive = value;
+    notifyListeners();
+  }
+
+
+  Future<bool> checkDoctorActiveStatus() async {
+    bool isActive = await DoctorServices().isActiveChecker();
+    return isActive;
+  }
+
+
+
+// ----------------------------------------------------------------------------------------
+ Stream<bool> getActiveStatusStream() {
+    return DoctorServices().isActiveStream();
+  }
+
+  Future<void> updateActiveStatus( bool isActive) {
+    return DoctorServices().updateActiveStatus( isActive);
+  }
+  // -----------------------------------------------------------------------------------
 
   // DoctorProfileEditontroller() {
   //   // intalseting();
@@ -35,7 +59,7 @@ class DoctorProfileEditontroller extends ChangeNotifier {
   //   //     bottomController.currentDoctror!.qualifications;
   //   // notifyListeners();
   // }
- void editprofile() {
+  void editprofile() {
     DoctorModel updatedoctor = DoctorModel(
         about: aboutController.text,
         category: catagryController.text,
