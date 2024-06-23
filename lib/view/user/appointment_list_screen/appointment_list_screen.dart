@@ -190,7 +190,7 @@ class AppointmentStatusList extends StatelessWidget {
                   left: (screenSize.width / 2) - 70,
                   top: 30,
                   child: Text(
-                    'No Confirmed Yet',
+                    'No $status Yet',
                     style: GoogleFonts.denkOne(),
                   ),
                 )

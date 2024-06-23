@@ -58,6 +58,7 @@ dependencies:
   flutter_custom_clippers: ^2.1.0
   fl_chart: ^0.68.0
   flutter_slidable: ^3.1.0
+  share_plus: ^9.0.0
 
 dev_dependencies:
   flutter_test:
@@ -99,6 +100,7 @@ flutter:
     - assets/heart.jpg
     - assets/dermatology.jpg
     - assets/ob.jpg
+    - assets/person.png
     - assets/Orthopedics.jpg
     - assets/Mental Health.gif
     - assets/femaleDoctor-JzHZTDpCc-transformed (1).jpeg

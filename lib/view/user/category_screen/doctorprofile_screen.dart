@@ -10,6 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+
+import '../../../controllers/doctor_controller/doctor_appontment_list.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   DoctorModel doctordetilas;
@@ -21,6 +24,9 @@ class DoctorProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doctordetilsController = Provider.of<DoctorAppontmentList>(
+      context,
+    );
     return Scaffold(
       body: Column(
         children: [
@@ -43,8 +49,10 @@ class DoctorProfileScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(
                                 17.0), // Adjust the radius as needed
                           )),
-                          child: Image.network(
-                            'https://cananywhere.com/wp-content/uploads/2020/10/floor-buffing.jpg',
+                          child: Image.asset(
+                            doctordetilas.gender == "Male"
+                                ? 'assets/doctors.jpg'
+                                : 'assets/femaleDoctor-JzHZTDpCc-transformed (1).jpeg',
                             height: double.infinity,
                             fit: BoxFit.cover,
                           ),
@@ -104,33 +112,55 @@ class DoctorProfileScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ListTile(
-                          title: AppStyles.boldText(
-                              title: 'Contact Information',
-                              color: Colors.black),
-                          subtitle: AppStyles.normalText(
-                              title: doctordetilas.phone,
-                              color: Colors.red,
-                              size: 18.0),
-                          trailing: Container(
-                              width: 55,
-                              height: 50,
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.green,
-                              ),
-                              child: Icon(
-                                Icons.phone,
-                                color: Colors.white,
-                              )),
-                        ),
                         SizedBox(height: 10),
                         AppStyles.boldText(title: 'About', color: Colors.black),
                         SizedBox(height: 5),
                         AppStyles.normalText(
                             title: doctordetilas.about, color: Colors.black),
                         SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                          
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AppStyles.boldText(
+                                      title: 'Contact Information',
+                                      color: Colors.black),
+                                  AppStyles.normalText(
+                                      title: doctordetilas.phone,
+                                      color: Colors.red,
+                                      size: 18.0)
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      doctordetilsController
+                                          .launchPhoneDialer(doctordetilas.phone);
+                                    },
+                                    child: Container(
+                                        width: 55,
+                                        height: 50,
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(12),
+                                          color: Colors.green,
+                                        ),
+                                        child: Icon(
+                                          Icons.phone,
+                                          color: Colors.white,
+                                        )),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                         AppStyles.boldText(
                             title: 'Address', color: Colors.black),
                         SizedBox(height: 5),
@@ -141,7 +171,7 @@ class DoctorProfileScreen extends StatelessWidget {
                             title: 'Working Time', color: Colors.black),
                         SizedBox(height: 5),
                         AppStyles.normalText(
-                            title: doctordetilas.workingTime,
+                            title: doctordetilas.workingStartTime,
                             color: Colors.black,
                             size: 18),
                         SizedBox(height: 10),
@@ -171,14 +201,14 @@ class DoctorProfileScreen extends StatelessWidget {
                           height: 65,
                           child: MaterialButton(
                             onPressed: () {
-//                               Share.share('''
-// Name: ${professional.name}
-// category: ${professional.category}
-// place:  ${professional.place}
-// Qualifications: ${professional.qualifications}
-// workingTime: ${professional.workingTime}
-// Phone: ${professional.phone}
-//                                        ''', subject: 'about Doctor');
+                              Share.share('''
+Name: ${doctordetilas.name}
+category: ${doctordetilas.category}
+place:  ${doctordetilas.place}
+Qualifications: ${doctordetilas.qualifications}
+workingTime: ${doctordetilas.workingStartTime}
+Phone: ${doctordetilas.phone}
+                                       ''', subject: 'about Doctor');
                             },
                             child: Icon(Icons.share),
                             color: Colors.white,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:doctor_appointment/view/auth/Login_screen/login_screen.dart';
 import 'package:doctor_appointment/view/user/user_bottom_bar.dart';
 import 'package:doctor_appointment/view/user/category_screen/category_screen.dart';
@@ -42,6 +44,7 @@ class AuthGate extends StatelessWidget {
                   child: Text('${roleSnapshot.error}'),
                 );
               } else if (roleSnapshot.hasData) {
+                log('ffffffffffffffffffffffffffffffffffffffffffff${roleSnapshot.data}');
                 // Check the user role and navigate accordingly
                 if (roleSnapshot.data == "doctors") {
                   return DoctorBottomBar();

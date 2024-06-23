@@ -15,7 +15,8 @@ class DoctorProfileEditontroller extends ChangeNotifier {
   TextEditingController catagryController = TextEditingController();
   TextEditingController placeController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
-  TextEditingController worktimeController = TextEditingController();
+  TextEditingController worktimeendController = TextEditingController();
+  TextEditingController worktimestartController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController qualificationController = TextEditingController();
   bool isActive = false;
@@ -25,21 +26,31 @@ class DoctorProfileEditontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<bool> checkDoctorActiveStatus() async {
-    bool isActive = await DoctorServices().isActiveChecker();
-    return isActive;
-  }
-
-
+  // Future<bool> checkDoctorActiveStatus() async {
+  //   bool isActive = await DoctorServices().isActiveChecker();
+  //   return isActive;
+  // }
 
 // ----------------------------------------------------------------------------------------
- Stream<bool> getActiveStatusStream() {
-    return DoctorServices().isActiveStream();
+  bool active = false;
+
+  Stream<bool> getActiveStatusStream() {
+    // Get the stream from the service
+    Stream<bool> activeStatusStream = DoctorServices().isActiveStream();
+
+    // Listen to the stream and update the active variable
+    activeStatusStream.listen((bool newStatus) {
+      active = newStatus;
+      print(
+          'Active status updated: $active'); // Debug print to check the status
+    });
+
+    // Return the stream if needed (optional)
+    return activeStatusStream;
   }
 
-  Future<void> updateActiveStatus( bool isActive) {
-    return DoctorServices().updateActiveStatus( isActive);
+  Future<void> updateActiveStatus(bool isActive) {
+    return DoctorServices().updateActiveStatus(isActive);
   }
   // -----------------------------------------------------------------------------------
 
@@ -61,13 +72,15 @@ class DoctorProfileEditontroller extends ChangeNotifier {
   // }
   void editprofile() {
     DoctorModel updatedoctor = DoctorModel(
+        isActive: active,
         about: aboutController.text,
         category: catagryController.text,
         id: Base.auth.currentUser!.uid,
         name: nameController.text,
         place: placeController.text,
         qualifications: qualificationController.text,
-        workingTime: worktimeController.text,
+        workEndingTime: worktimeendController.text,
+        workingStartTime: worktimestartController.text,
         phone: phoneController.text,
         isDoctor: true,
         gender: bottomController.currentDoctror!.gender);

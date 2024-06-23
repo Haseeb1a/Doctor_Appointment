@@ -12,8 +12,12 @@ class Custom_Textformfeild extends StatelessWidget {
   IconData icon;
   final int maxline;
   final Color iconColor;
+  final TextInputType keybordtype;
+  final bool obscureText;
   Custom_Textformfeild(
       {super.key,
+      this.keybordtype = TextInputType.name,
+      this.obscureText=false,
       required this.hinttext,
       required this.textEditingController,
       this.hintcolor = Colors.black,
@@ -27,6 +31,7 @@ class Custom_Textformfeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText:  obscureText,
       controller: textEditingController,
       cursorColor: Colors.blue,
       maxLines: maxline,
@@ -37,7 +42,9 @@ class Custom_Textformfeild extends StatelessWidget {
           return null;
         }
       },
+      keyboardType: keybordtype,
       decoration: InputDecoration(
+
           //  contentPadding:  EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
 
           prefixIcon: Icon(

@@ -39,121 +39,132 @@ class SignupScreen extends StatelessWidget {
                 flex: 2,
                 child: Container(
                     child: Form(
-                      key: formKey,
+                        key: formKey,
                         child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Custom_Textformfeild(
-                        unvaildText: "enter the name",
-                        hinttext: "Enter Your Name",
-                        textEditingController: singUpcontroller.nameController,
-                        icon: Icons.person,
-                      ),
-                      CustomBox.height(20),
-                      Custom_Textformfeild(
-                        unvaildText: "enter the email",
-                        hinttext: "Enter Your Email",
-                        textEditingController: singUpcontroller.emailController,
-                        icon: Icons.email,
-                      ),
-                      CustomBox.height(20),
-                      Custom_Textformfeild(
-                        unvaildText: "enter the password",
-                        hinttext: "Enter Your Password ",
-                        textEditingController:
-                            singUpcontroller.passwordController,
-                        icon: Icons.lock,
-                      ),
-                      CustomBox.height(20),
-                      Custom_Textformfeild(
-                        unvaildText: "enter the password",
-                        hinttext: "Confirm Password",
-                        textEditingController:
-                            singUpcontroller.confrimpasswordController,
-                        icon: Icons.lock,
-                      ),
-                      CustomBox.height(10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
+                          child: Column(
                             children: [
-                              Radio(
-                                  activeColor: Colors.blue.shade700,
-                                  value: 'user', //userendpoints
-                                  groupValue: singUpcontroller.groupValue,
-                                  onChanged: (value) {
-                                    singUpcontroller
-                                        .choosingRegistorCatogory(value);
-                                  }),
-                              const Text(
-                                'user',
-                                style: TextStyle(),
+                              Custom_Textformfeild(
+                                unvaildText: "enter the name",
+                                hinttext: "Enter Your Name",
+                                textEditingController:
+                                    singUpcontroller.nameController,
+                                icon: Icons.person,
+                              ),
+                              CustomBox.height(20),
+                              Custom_Textformfeild(
+                                unvaildText: "enter the email",
+                                hinttext: "Enter Your Email",
+                                textEditingController:
+                                    singUpcontroller.emailController,
+                                icon: Icons.email,
+                              ),
+                              CustomBox.height(20),
+                              Custom_Textformfeild(
+                                unvaildText: "enter the password",
+                                hinttext: "Enter Your Password ",
+                                textEditingController:
+                                    singUpcontroller.passwordController,
+                                obscureText: true,
+                                icon: Icons.lock,
+                              ),
+                              CustomBox.height(20),
+                              Custom_Textformfeild(
+                                unvaildText: "enter the password",
+                                hinttext: "Confirm Password",
+                                textEditingController:
+                                    singUpcontroller.confrimpasswordController,
+                                obscureText: true,
+                                icon: Icons.lock,
+                              ),
+                              CustomBox.height(10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Radio(
+                                          activeColor: Colors.blue.shade700,
+                                          value: 'user', //userendpoints
+                                          groupValue:
+                                              singUpcontroller.groupValue,
+                                          onChanged: (value) {
+                                            singUpcontroller
+                                                .choosingRegistorCatogory(
+                                                    value);
+                                          }),
+                                      const Text(
+                                        'user',
+                                        style: TextStyle(),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                          activeColor: const Color.fromRGBO(
+                                              25, 118, 210, 1),
+                                          value:
+                                              'Doctor', //Proffestionalendpoints
+                                          groupValue:
+                                              singUpcontroller.groupValue,
+                                          onChanged: (value) {
+                                            singUpcontroller
+                                                .choosingRegistorCatogory(
+                                                    value!);
+                                          }),
+                                      const Text(
+                                        'Doctor',
+                                        style: TextStyle(),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              CustomButton(
+                                text: singUpcontroller.groupValue == 'Doctor'
+                                    ? "More About You"
+                                    : "SingUp",
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    if (singUpcontroller.groupValue ==
+                                        'Doctor') {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DoctorSingupDetails(
+                                              confirmpassword: singUpcontroller
+                                                  .confrimpasswordController
+                                                  .text,
+                                              email: singUpcontroller
+                                                  .emailController.text,
+                                              name: singUpcontroller
+                                                  .nameController.text,
+                                              password: singUpcontroller
+                                                  .passwordController.text,
+                                            ),
+                                          ));
+                                    } else {
+                                      String? result =
+                                          await singUpcontroller.userSingUp();
+                                      if (result != null) {
+                                        showCustomSnackBar(context, result);
+                                      }
+                                      if (result == "success") {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Loginpage(),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  }
+                                },
                               )
                             ],
                           ),
-                          Row(
-                            children: [
-                              Radio(
-                                  activeColor:
-                                      const Color.fromRGBO(25, 118, 210, 1),
-                                  value: 'Doctor', //Proffestionalendpoints
-                                  groupValue: singUpcontroller.groupValue,
-                                  onChanged: (value) {
-                                    singUpcontroller
-                                        .choosingRegistorCatogory(value!);
-                                  }),
-                              const Text(
-                                'Doctor',
-                                style: TextStyle(),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      CustomButton(
-                        text: singUpcontroller.groupValue == 'Doctor'
-                            ? "More About You"
-                            : "SingUp",
-                        onPressed: () async {
-                          if (formKey.currentState!.validate()) {
-
-                            if (singUpcontroller.groupValue == 'Doctor') {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DoctorSingupDetails(
-                                      confirmpassword: singUpcontroller
-                                          .confrimpasswordController.text,
-                                      email:
-                                          singUpcontroller.emailController.text,
-                                      name:
-                                          singUpcontroller.nameController.text,
-                                      password: singUpcontroller
-                                          .passwordController.text,
-                                    ),
-                                  ));
-                            } else {
-                              String? result =
-                                  await singUpcontroller.userSingUp();
-                              if (result != null) {
-                                showCustomSnackBar(context, result);
-                              }
-                              if (result == "success") {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Loginpage(),
-                                  ),
-                                );
-                              }
-                            }
-                          }
-                        },
-                      )
-                    ],
-                  ),
-                ))),
+                        ))),
               ),
               GestureDetector(
                 onTap: () {

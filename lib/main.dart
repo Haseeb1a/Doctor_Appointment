@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => DoctorAppontmentList(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => DoctorProfileEditontroller(),
         ),
         // DoctorProfileEditontroller

@@ -43,7 +43,7 @@ class DoctorSingupDetails extends StatelessWidget {
               Column(
                 children: [
                   SizedBox(
-                    width: 200,
+                    width: 150,
                     child:
                         Lottie.asset('assets/Animation - 1718086168737.json'),
                   ),
@@ -86,19 +86,71 @@ class DoctorSingupDetails extends StatelessWidget {
                         icon: Icons.phone,
                       ),
                       CustomBox.height(15),
-                      Custom_Textformfeild(
-                        unvaildText: "Enter the working time",
-                        hinttext: "Working time",
-                        textEditingController:
-                            singUpController.workingTimeController,
-                        icon: Icons.timelapse_rounded,
-                      ),
+                         Row(
+                      children: [
+                        Expanded(
+                          child: Custom_Textformfeild(
+                            hinttext:'Work Start Time' ,
+                            icon: Icons.timelapse_sharp,
+                            textEditingController: singUpController.worktimestartController,
+                            unvaildText:'Enter StartTime' ,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Custom_Textformfeild(
+                            hinttext: "Work end Time",
+                            icon: Icons.timelapse_sharp ,
+                            textEditingController: singUpController.worktimeendController ,
+                            unvaildText: "Enter Entingtime",
+                          ),
+                        ),
+                      ],
+                    ),
                       CustomBox.height(15),
                       Custom_Textformfeild(
                         unvaildText: "Type about you",
                         hinttext: "About",
                         textEditingController: singUpController.aboutController,
                         icon: Icons.swipe_right_alt_rounded,
+                      ),
+                      CustomBox.height(15),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        height: 60,
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          children: [
+                            Icon(Icons.person_2_sharp),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  borderRadius: BorderRadius.circular(30),
+                                  isExpanded: true,
+                                  value: singUpController.selectedGender,
+                                  hint: Text('Select Gender'),
+                                  items: singUpController.genders
+                                      .map((String gender) {
+                                    return DropdownMenuItem<String>(
+                                      value: gender,
+                                      child: Text(gender),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    singUpController.gendetfliper(newValue!);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       CustomBox.height(30),
                       CustomButton(

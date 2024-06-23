@@ -44,7 +44,7 @@ class Homeviewscreen extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         child: Image.asset(
-                          'assets/doctorss.jpg',
+                          'assets/person.png',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -216,7 +216,7 @@ class Homeviewscreen extends StatelessWidget {
                                                                 .nameddoctors[
                                                                     index]
                                                                 .gender ==
-                                                            "male"
+                                                            "Male"
                                                         ? Image.asset(
                                                             'assets/doctors.jpg')
                                                         : Image.asset(
@@ -262,7 +262,7 @@ class Homeviewscreen extends StatelessWidget {
                       child: SizedBox(
                         height: 250,
                         child: bottomController.doctorDetails.isEmpty
-                            ? Custom_Shimmer(width: 150, height: 100)
+                            ? Custom_Shimmer(width: 150.0, height: 100.0)
                             : ListView.builder(
                                 physics: BouncingScrollPhysics(),
                                 itemCount:
@@ -301,7 +301,7 @@ class Homeviewscreen extends StatelessWidget {
                                                               .doctorDetails[
                                                                   index]
                                                               .gender ==
-                                                          "male"
+                                                          "Male"
                                                       ? Image.asset(
                                                           'assets/doctors.jpg')
                                                       : Image.asset(

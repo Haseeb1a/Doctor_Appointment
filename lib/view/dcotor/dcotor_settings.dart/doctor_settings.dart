@@ -79,8 +79,8 @@ class DoctorSettings extends StatelessWidget {
                                     )
                                   : Hero(
                                       tag: 'profilephoto',
-                                      child: Image.asset(
-                                        'assets/femaleDoctor.jpg',
+                                      child: Image.asset(value.currentDoctror!.gender=="Male"? 
+                                      'assets/doctors.jpg' : 'assets/femaleDoctor.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                     );
@@ -108,7 +108,7 @@ class DoctorSettings extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            value.currentDoctror!.about,
+                            value.currentDoctror!.category,
                           ),
                         ],
                       );

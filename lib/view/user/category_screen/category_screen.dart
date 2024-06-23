@@ -224,7 +224,7 @@ class CategoryScreen extends StatelessWidget {
                                                                 .categoryDoctors[
                                                                     index]
                                                                 .gender ==
-                                                            "male"
+                                                            "Male"
                                                         ? Image.asset(
                                                             'assets/doctors.jpg')
                                                         : Image.asset(
@@ -347,19 +347,19 @@ class CategoryScreen extends StatelessWidget {
                                           contents(
                                               value: value
                                                   .categoryDoctors[index]
-                                                  .workingTime,
-                                              text: 'workingTime'),
+                                                  .workingStartTime,
+                                              text: 'Start'),
                                           contents(
                                               value: value
                                                   .categoryDoctors[index]
-                                                  .workingTime,
-                                              text: 'workingTime'),
-                                          Row(
+                                                  .workEndingTime,
+                                              text: 'close'),
+                                         Row(
                                             children: [
-                                              Text('diactive'),
+                                              Text(value.categoryDoctors[index].isActive? 'Active':"diactive"),
                                               Icon(
                                                 IconlyBold.activity,
-                                                color: Colors.red,
+                                                color:value.categoryDoctors[index].isActive?Colors.green: Colors.red,
                                               ),
                                             ],
                                           )
@@ -417,11 +417,11 @@ class contents extends StatelessWidget {
         children: [
           Text(
             value,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
           Text(
             text,
-            style: TextStyle(fontSize: 10),
+            style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
           ),
         ],
       ),

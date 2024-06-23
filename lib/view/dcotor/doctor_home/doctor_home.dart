@@ -43,10 +43,10 @@ class DoctorHome extends StatelessWidget {
                     width: 50,
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset(
-                        'assets/doctorss.jpg',
-                        fit: BoxFit.cover,
-                      ),
+                      child:  Image.asset(homedata.currentDoctror!.gender=="Male"? 
+                                      'assets/doctors.jpg' : 'assets/femaleDoctor.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
                     ),
                   ),
                   SizedBox(
@@ -120,8 +120,12 @@ class DoctorHome extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 14),
             child: Align(
                 alignment: Alignment.bottomLeft,
-                child: AppStyles.boldText(
-                    title: "Confirmed Appointments", color: AppColors.dark)),
+             child:    Text(
+                  "Confirmed Appointments",
+                  style: GoogleFonts.mali(
+                      fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+             ),
           ),
           AppointmentStatusLists(
             authType: "doctors",

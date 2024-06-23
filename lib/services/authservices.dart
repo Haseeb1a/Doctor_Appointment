@@ -110,7 +110,8 @@ class AuthServices {
 
         // User datas
         DoctorModel doctordetails = DoctorModel(
-            gender: 'male',
+          isActive: true,
+            gender: doctordetals.gender,
             isDoctor: doctordetals.isDoctor,
             about: doctordetals.about,
             category: doctordetals.category,
@@ -118,7 +119,9 @@ class AuthServices {
             name: doctordetals.name,
             place: doctordetals.place,
             qualifications: doctordetals.qualifications,
-            workingTime: doctordetals.workingTime,
+            workingStartTime: doctordetals.workingStartTime,
+            workEndingTime: doctordetals.workEndingTime,
+            
             phone: doctordetals.phone);
 
         await Base.firestore

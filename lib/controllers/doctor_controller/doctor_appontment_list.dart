@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:doctor_appointment/services/doctor_services.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/user_appointment_model.dart';
 
@@ -12,6 +13,19 @@ class DoctorAppontmentList extends ChangeNotifier {
     touchedIndex = totchedsection;
     notifyListeners();
   }
+
+
+
+  void launchPhoneDialer(String phoneNumber) async {
+    final url = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
 
   List<AppointmentModel> appointmentDetails = [];
   Future<List<AppointmentModel>> getAppoitmentdetails(String status) async {

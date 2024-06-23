@@ -28,8 +28,10 @@ class _DoctorProfileEditState extends State<DoctorProfileEdit> {
         doctordata.currentDoctror!.category;
     profilecontroller.placeController.text = doctordata.currentDoctror!.place;
     profilecontroller.aboutController.text = doctordata.currentDoctror!.about;
-    profilecontroller.worktimeController.text =
-        doctordata.currentDoctror!.workingTime;
+    profilecontroller.worktimestartController.text =
+        doctordata.currentDoctror!.workingStartTime;
+    profilecontroller.worktimeendController.text =
+        doctordata.currentDoctror!.workEndingTime;
     profilecontroller.phoneController.text = doctordata.currentDoctror!.phone;
     profilecontroller.qualificationController.text =
         doctordata.currentDoctror!.qualifications;
@@ -135,8 +137,12 @@ class _DoctorProfileEditState extends State<DoctorProfileEdit> {
                         final isActive = snapshot.data ?? false;
                         return Column(
                           children: [
-                            AppStyles.normalText(title: isActive==true?"Active":"noActive", size: 12,color: Colors.white),
+                            AppStyles.normalText(
+                                title: isActive == true ? "Active" : "noActive",
+                                size: 12,
+                                color: Colors.white),
                             Switch(
+                              activeColor: Colors.green,
                               value: isActive,
                               onChanged: (value) {
                                 profilecontroller.updateActiveStatus(
@@ -275,24 +281,56 @@ class _DoctorProfileEditState extends State<DoctorProfileEdit> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your workingtime';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: profilecontroller.worktimeController,
-                      decoration: InputDecoration(
-                        counterText: '',
-                        hintText: 'Working time',
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter Start Time';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller:
+                                profilecontroller.worktimestartController,
+                            decoration: InputDecoration(
+                              counterText: '',
+                              hintText: 'Work Starting Time',
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your workingtime';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller:
+                                profilecontroller.worktimeendController,
+                            decoration: InputDecoration(
+                              counterText: '',
+                              hintText: 'Work Einding Time',
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       height: 20,

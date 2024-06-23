@@ -41,55 +41,10 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(
                 height: 200,
               ),
+              
               Positioned(
                 left: 10,
-                bottom: 15,
-                child: SizedBox(
-                    height: 120,
-                    width: 120,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 4,
-                        ),
-                      ),
-                      child: SizedBox(
-                        height: 150,
-                        width: 130,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Consumer<BottomController>(
-                            builder: (context, value, child) {
-                              // Text('http://127.0.0.1:8000 ${value.user!.userprofile!.image}',
-                              //     style: TextStyle(color: Colors.red),);
-                              print(
-                                  'assets/femaleDoctor.jpg');
-                              return value.userDetails == null
-                                  ? FadeShimmer(
-                                      height: 8,
-                                      width: 100,
-                                      radius: 4,
-                                      highlightColor: Color(0xffF9F9FB),
-                                      baseColor: Color(0xffE6E8EB),
-                                    )
-                                  : Hero(
-                                      tag: 'profilephoto',
-                                      child: Image.asset(
-                                        'assets/femaleDoctor.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    );
-                            },
-                          ),
-                        ),
-                      ),
-                    )),
-              ),
-              Positioned(
-                right: 100,
-                bottom: 28,
+                bottom: 2,
                 child: Consumer<BottomController>(
                   builder: (context, value, child) {
                     // value.getUserdata();
@@ -120,31 +75,7 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
               ),
-              Positioned(
-                  right: 10,
-                  bottom: 55,
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           ProfileEditpage(user: userprovider.user),
-                      //     ));
-                    },
-                    child: Container(
-                        decoration: AppStyles.shadowDecoraion,
-                        // decoration: BoxDecoration(
-
-                        //   borderRadius: BorderRadius.circular(10),
-                        //   color: Color.fromARGB(146, 248, 245, 245),
-                        // ),
-                        height: 50,
-                        width: 50,
-                        child: const Icon(
-                          Icons.movie_edit,
-                        )),
-                  )),
+       
        
             ],
           ),

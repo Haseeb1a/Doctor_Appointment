@@ -149,7 +149,7 @@ class Chart extends StatelessWidget {
           return PieChartSectionData(
             color: Color.fromARGB(255, 241, 197, 0),
             value: peindings.toDouble(),
-            title: '$peindings',
+            title: '',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -162,7 +162,7 @@ class Chart extends StatelessWidget {
           return PieChartSectionData(
             color: Colors.green,
             value: confirmed.toDouble(),
-            title: '${chartData.workcompleted}',
+            title: '',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,

@@ -13,6 +13,17 @@ class DoctorSingupcontroller extends ChangeNotifier {
   final TextEditingController placeController = TextEditingController();
   final TextEditingController workingTimeController = TextEditingController();
   final TextEditingController aboutController = TextEditingController();
+    TextEditingController worktimeendController = TextEditingController();
+  TextEditingController worktimestartController = TextEditingController();
+
+  String selectedGender = "Male";
+
+  gendetfliper(String newGenter) {
+    selectedGender = newGenter;
+    notifyListeners();
+  }
+
+  final List<String> genders = ['Male', 'Female', 'Others'];
 
   Future<String?> doctorSingUp(
       String password, String email, String name) async {
@@ -25,15 +36,18 @@ class DoctorSingupcontroller extends ChangeNotifier {
     print("Working Time: ${workingTimeController.text}");
     print("Phone: ${phoneController.text}");
     DoctorModel doctor = DoctorModel(
-        isDoctor:  true,
+      
+        isActive: true,
+        isDoctor: true,
         about: aboutController.text,
         category: categoryController.text,
         id: '',
         name: name,
         place: placeController.text,
         qualifications: qualifciatonController.text,
-        workingTime: workingTimeController.text,
-        gender: 'male',
+        workingStartTime: worktimestartController.text,
+        workEndingTime: worktimeendController.text,
+        gender: selectedGender,
         phone: phoneController.text);
     AuthServices().singUpDoctor(
         email: email, password: password, username: name, doctordetals: doctor);

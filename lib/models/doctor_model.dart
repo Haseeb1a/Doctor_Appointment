@@ -5,10 +5,12 @@ class DoctorModel {
   final String name;
   final String place;
   final String qualifications;
-  final String workingTime;
+  final String workingStartTime; // New field for working start time
+  final String workEndingTime; // New field for working end time
   final String phone;
   final bool isDoctor;
-  final String gender; // New field for gender
+  final String gender; // Field for gender
+  final bool isActive; // New field for isActive
 
   DoctorModel({
     required this.about,
@@ -17,10 +19,12 @@ class DoctorModel {
     required this.name,
     required this.place,
     required this.qualifications,
-    required this.workingTime,
+    required this.workingStartTime, // Added workingStartTime to constructor
+    required this.workEndingTime, // Added workEndingTime to constructor
     required this.phone,
     required this.isDoctor,
     required this.gender, // Added gender to constructor
+    required this.isActive, // Added isActive to constructor
   });
 
   // Factory method to create a DoctorModel instance from a map (e.g., from Firestore)
@@ -32,10 +36,12 @@ class DoctorModel {
       name: map['name'] ?? '',
       place: map['place'] ?? '',
       qualifications: map['qualifications'] ?? '',
-      workingTime: map['workingTime'] ?? '',
+      workingStartTime: map['workingStartTime'] ?? '', // Retrieve workingStartTime from map
+      workEndingTime: map['workEndingTime'] ?? '', // Retrieve workEndingTime from map
       phone: map['phone'] ?? '',
       isDoctor: map['isDoctor'] ?? false,
       gender: map['gender'] ?? '', // Retrieve gender from map
+      isActive: map['isActive'] ?? false, // Retrieve isActive from map
     );
   }
 
@@ -48,10 +54,12 @@ class DoctorModel {
       'name': name,
       'place': place,
       'qualifications': qualifications,
-      'workingTime': workingTime,
+      'workingStartTime': workingStartTime, // Include workingStartTime in the map
+      'workEndingTime': workEndingTime, // Include workEndingTime in the map
       'phone': phone,
       'isDoctor': isDoctor,
       'gender': gender, // Include gender in the map
+      'isActive': isActive, // Include isActive in the map
     };
   }
 }
